@@ -27,7 +27,12 @@ export class PlacesService {
 
   addPlaceToUserPlaces(place: Place) {
     const prevPlaces = this.userPlaces();
-    this.userPlaces.set([...prevPlaces,place]);
+
+    if(!prevPlaces.some((p) => p.id === place.id)){
+        this.userPlaces.set([...prevPlaces,place]);
+    }
+
+    
 
     return  this.httpClient.put('http://localhost:3000/user-places', {
       placeId: place.id,
