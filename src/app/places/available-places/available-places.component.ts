@@ -47,4 +47,10 @@ export class AvailablePlacesComponent implements OnInit {
     })
   }
 
+  onSelectPlace(selectedPlace: Place){
+    this.httpClient.put('http://localhost:3000/user-places',{
+      placeId:selectedPlace.id
+    });
+  }
+
 }
