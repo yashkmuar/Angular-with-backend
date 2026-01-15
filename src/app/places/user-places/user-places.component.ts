@@ -22,11 +22,11 @@ export class UserPlacesComponent implements OnInit{
   
    ngOnInit(){
       this.isFetching.set(true);
-      const subscription = this.httpClient.get<{places: Place[]}>('http://localhost:3000/places')
+      const subscription = this.httpClient.get<{places: Place[]}>('http://localhost:3000/user-places')
       .pipe(
         map((resData) => resData.places), catchError((error) => {
           console.log(error);
-          return throwError(() => new Error('Something went wrong fetching the available places. Please, try again later!!'));
+          return throwError(() => new Error('Something went wrong fetching your favorite places. Please, try again later!!'));
         }
         )
       )
