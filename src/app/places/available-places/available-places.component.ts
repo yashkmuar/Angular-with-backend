@@ -31,7 +31,8 @@ export class AvailablePlacesComponent implements OnInit {
         this.places.set(places);
       },
       error: (error) => {
-        this.error.set(error);
+        console.log(error);
+        this.error.set("Something went wrong fetching the available places. Please, try again later!!");
       },
       complete: () => { // this function runs when the entire process is complete.
         this.isFetching.set(false);
