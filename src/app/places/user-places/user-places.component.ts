@@ -23,7 +23,7 @@ export class UserPlacesComponent implements OnInit{
   
    ngOnInit(){
       this.isFetching.set(true);
-      const subscription = 
+      const subscription = this.placesService.loadUserPlaces()
       .subscribe({
         next: (places) => {
           this.places.set(places);
