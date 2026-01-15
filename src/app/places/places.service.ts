@@ -20,7 +20,11 @@ export class PlacesService {
 
   loadUserPlaces() {}
 
-  addPlaceToUserPlaces(place: Place) {}
+  addPlaceToUserPlaces(placeId: string) {
+    return  this.httpClient.put('http://localhost:3000/user-places', {
+      placeId: placeId
+    })
+  }
 
   removeUserPlace(place: Place) {}
 
