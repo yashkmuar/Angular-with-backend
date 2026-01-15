@@ -4,7 +4,7 @@ import { Place } from '../place.model';
 import { PlacesComponent } from '../places.component';
 import { PlacesContainerComponent } from '../places-container/places-container.component';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs';
+import { catchError, map, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-available-places',
@@ -24,15 +24,18 @@ export class AvailablePlacesComponent implements OnInit {
     this.isFetching.set(true);
     const subscription = this.httpClient.get<{places: Place[]}>('http://localhost:3000/places')
     .pipe(
-      map((resData) => resData.places)
+      map((resData) => resData.places), catchError((error) => {
+        console.log(error);
+        return throwError(() => new Error('Something went wrong fetching the available places. Please, try again later!!'));
+      }
+      )
     )
     .subscribe({
       next: (places) => {
         this.places.set(places);
       },
-      error: (error) => {
-        console.log(error);
-        this.error.set("Something went wrong fetching the available places. Please, try again later!!");
+      error: (error: Error) => {
+        this.error.set(error.message);
       },
       complete: () => { // this function runs when the entire process is complete.
         this.isFetching.set(false);
