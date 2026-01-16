@@ -38,5 +38,7 @@ export class UserPlacesComponent implements OnInit{
       })
     }
   
-
+    onRemovePlace(place:Place){
+      this.placesService.removeUserPlace(place);
+    }
 }
