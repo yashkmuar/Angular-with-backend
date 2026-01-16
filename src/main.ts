@@ -9,7 +9,7 @@ function loggingInterceptor(request:HttpRequest<unknown>, next:HttpHandlerFn) {
     });
     console.log('[Outgoing Request]');
     console.log(request);
-    return next(request);
+    return next(req);
 }
 
 
